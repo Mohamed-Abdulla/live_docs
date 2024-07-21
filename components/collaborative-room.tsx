@@ -4,23 +4,26 @@ import { FC } from "react";
 import { Loader } from "./loader";
 import { Header } from "@/components/header";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-interface CollaborativeRoomProps {}
+import { ActiveCollaborators } from "./active-collaborators";
 
-export const CollaborativeRoom: FC<CollaborativeRoomProps> = () => {
+export const CollaborativeRoom: FC<CollaborativeRoomProps> = ({ roomId, roomMetadata }) => {
   return (
-    <RoomProvider id="my-room">
+    <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<Loader />}>
         <div className="collaborative-room">
           <Header>
             <div className="flex w-fit items-center justify-center gap-2">
               <p className="document-title">Share</p>
             </div>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            <div className="w-full flex flex-1 justify-end gap-2 sm:gap-3">
+              <ActiveCollaborators />
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </div>
           </Header>
         </div>
       </ClientSideSuspense>

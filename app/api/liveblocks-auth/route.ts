@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       color: getUserColor(id),
     },
   };
-
+  //live blocks authentication
   const { status, body } = await liveblocks.identifyUser(
     {
       userId: user.info.email,
