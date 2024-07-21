@@ -8,9 +8,9 @@ import { ActiveCollaborators } from "./active-collaborators";
 import { Input } from "./ui/input";
 import Image from "next/image";
 import { updateDocument } from "@/lib/actions/room.actions";
+import { Editor } from "./editor/Editor";
 
-export const CollaborativeRoom: FC<CollaborativeRoomProps> = ({ roomId, roomMetadata }) => {
-  const currentUserType = "editor";
+export const CollaborativeRoom: FC<CollaborativeRoomProps> = ({ roomId, roomMetadata, currentUserType, users }) => {
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
@@ -99,6 +99,7 @@ export const CollaborativeRoom: FC<CollaborativeRoomProps> = ({ roomId, roomMeta
               </SignedIn>
             </div>
           </Header>
+          <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
       </ClientSideSuspense>
     </RoomProvider>
