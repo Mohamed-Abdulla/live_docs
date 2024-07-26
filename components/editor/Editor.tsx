@@ -20,6 +20,7 @@ import {
 import { Loader } from "../loader";
 import FloatingToolbarPlugin from "./plugins/FloatingToolbar";
 import { useThreads } from "@liveblocks/react/suspense";
+import { Comments } from "../comments";
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
 // try to recover gracefully without losing user data.
@@ -49,11 +50,11 @@ export function Editor({ roomId, currentUserType }: { roomId: string; currentUse
           <ToolbarPlugin />
           {/* {currentUserType === 'editor' && <DeleteModal roomId={roomId} />} */}
         </div>
-        <div className="editor--wrapper flex flex-col items-center justify-start">
+        <div className="editor-wrapper flex flex-col items-center justify-start">
           {status === "not-loaded" || status === "loading" ? (
             <Loader />
           ) : (
-            <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px]">
+            <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
               <RichTextPlugin
                 contentEditable={<ContentEditable className="editor-input h-full" />}
                 placeholder={<Placeholder />}
@@ -67,6 +68,7 @@ export function Editor({ roomId, currentUserType }: { roomId: string; currentUse
           <LiveblocksPlugin>
             <FloatingComposer className="w-[350px]" />
             <FloatingThreads threads={threads} />
+            <Comments />
           </LiveblocksPlugin>
         </div>
       </div>
