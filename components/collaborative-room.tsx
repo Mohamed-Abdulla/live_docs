@@ -9,6 +9,7 @@ import { Input } from "./ui/input";
 import Image from "next/image";
 import { updateDocument } from "@/lib/actions/room.actions";
 import { Editor } from "./editor/Editor";
+import { ShareModal } from "./share-modal";
 
 export const CollaborativeRoom: FC<CollaborativeRoomProps> = ({ roomId, roomMetadata, currentUserType, users }) => {
   const [editing, setEditing] = useState(false);
@@ -91,6 +92,12 @@ export const CollaborativeRoom: FC<CollaborativeRoomProps> = ({ roomId, roomMeta
             </div>
             <div className="w-full flex flex-1 justify-end gap-2 sm:gap-3">
               <ActiveCollaborators />
+              <ShareModal
+                roomId={roomId} // 👈
+                collaborators={users} // 👈
+                creatorId={roomMetadata.creatorId} // 👈
+                currentUserType={currentUserType} // 👈
+              />
               <SignedOut>
                 <SignInButton />
               </SignedOut>
